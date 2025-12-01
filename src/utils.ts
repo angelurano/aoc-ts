@@ -24,7 +24,7 @@ export async function askUser(
 
 export async function fetchDayData(day: Date): Promise<string | null> {
   try {
-    const cookie = process.env.ADVENTOFCODE_SESSION;
+    const cookie = process.env?.ADVENTOFCODE_SESSION;
     if (cookie === undefined) {
       throw new Error(
         'Session cookie not found in environment variables, create as ADVENTOFCODE_SESSION',
