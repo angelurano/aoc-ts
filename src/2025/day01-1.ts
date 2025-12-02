@@ -12,14 +12,14 @@ console.log(res);
 
 function countZeroPass(instructions: string[]): number {
   let counter = 0;
+  let pos = INIT_VALUE;
 
-  instructions.reduce((acc, instruction) => {
+  instructions.forEach((instruction) => {
     const fact = instruction.startsWith('L') ? -1 : 1;
     const value = parseInt(instruction.slice(1), 10) * fact;
-    const current = mod(acc + value, MAX_LIMIT);
-    if (current === 0) counter++;
-    return current;
-  }, INIT_VALUE);
+    pos = mod(pos + value, MAX_LIMIT);
+    if (pos === 0) counter++;
+  });
   return counter;
 }
 
