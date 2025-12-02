@@ -19,7 +19,7 @@ function countZeroPass(instructions: string[]): number {
     const value = parseInt(instruction.slice(1), 10) * fact;
     const prevPos = posAbs;
     posAbs += value;
-    if (fact == 1) {
+    if (fact === 1) {
       counter += Math.floor(posAbs / MAX_LIMIT) - Math.floor(prevPos / MAX_LIMIT);
     } else {
       counter += Math.ceil(prevPos / MAX_LIMIT) - Math.ceil(posAbs / MAX_LIMIT);
