@@ -47,9 +47,20 @@ await writeCodeFile(srcDir, `day${format(day, 'DD')}-2.ts`, baseCode);
 console.log('Done!');
 rl.close();
 
+function isAdventOfCode(d: Date): boolean {
+  const month = d.getMonth();
+  const day = d.getDate();
+  const year = d.getFullYear();
+  return (
+    year >= 2015 &&
+    month === 11 &&
+    ((year <= 2024 && day <= 25) || (year >= 2025 && day <= 12))
+  );
+}
+
 async function getDate(): Promise<Date | null> {
   const currentDate = new Date();
-  if (currentDate.getMonth() === 11 && currentDate.getDate() <= 25) {
+  if (isAdventOfCode(currentDate)) {
     console.log('Currently is Advent of Code season!');
     const answer = await askUser(
       rl,
@@ -67,8 +78,7 @@ async function getDate(): Promise<Date | null> {
   const day = parseInt(await askUser(rl, 'Enter the day of the challenge: '));
   if (
     isNaN(day) ||
-    day < 1 ||
-    day > 25 ||
+    !isAdventOfCode(new Date(year, 11, day)) ||
     (year === currentDate.getFullYear() && day > currentDate.getDate())
   ) {
     console.log('Invalid day!');
